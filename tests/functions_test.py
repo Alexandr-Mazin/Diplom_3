@@ -1,5 +1,4 @@
 from pages.functions_page import FunctionsPage
-from pages.base_page import BasePage
 from conftest import driver
 import allure
 from urls import Url
@@ -9,12 +8,11 @@ class TestFunctions:
     @allure.description('переход по клику на «Конструктор»')
     @allure.title('переход по клику на «Конструктор»')
     def test_click_button_constructor(self, driver):
-        base_page = BasePage(driver)
         function = FunctionsPage(driver)
 
         function.wait_button_constructor()
         function.click_button_constructor()
-        assert base_page.get_url() == Url.url_constructor
+        assert function.check_url() == Url.url_constructor
 
     @allure.description('переход по клику на «Лента заказов»')
     @allure.title('переход по клику на «Лента заказов»')

@@ -1,5 +1,4 @@
 from pages.password_recovery_page import PasswordRecoveryPage
-from pages.base_page import BasePage
 from conftest import driver
 import allure
 from urls import Url
@@ -9,16 +8,14 @@ class TestPasswordRecovery:
     @allure.description('Переход на страницу восстановления пароля по кнопке «Восстановить пароль»')
     @allure.title('Переход на страницу восстановления пароля по кнопке «Восстановить пароль»')
     def test_click_button_recovery_password(self, driver):
-        base_page = BasePage(driver)
         password_recovery_page = PasswordRecoveryPage(driver)
         password_recovery_page.wait_button_recovery_password()
         password_recovery_page.click_button_recovery_password()
-        assert base_page.get_url() == Url.url_password_recovery
+        assert password_recovery_page.get_url() == Url.url_password_recovery
 
     @allure.description('Ввод почты и клик по кнопке «Восстановить»')
     @allure.title('Ввод почты и клик по кнопке «Восстановить»')
     def test_email_click_recovery_password(self, driver, test_mail):
-        base_page = BasePage(driver)
         password_recovery_page = PasswordRecoveryPage(driver)
 
         password_recovery_page.wait_button_recovery_password()
@@ -28,8 +25,7 @@ class TestPasswordRecovery:
         password_recovery_page.click_button_recovery()
         password_recovery_page.wait_displaying_save()
 
-
-        assert base_page.get_url() == Url.url_new_password
+        assert password_recovery_page.get_url() == Url.url_new_password
 
     @allure.description('Клик по кнопке показать/скрыть пароль делает поле активным — подсвечивает его')
     @allure.title('Клик по кнопке показать/скрыть пароль делает поле активным — подсвечивает его')
